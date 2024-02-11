@@ -1,1 +1,1 @@
-# WeLoveMoviesV2
+# WeLoveMovies
