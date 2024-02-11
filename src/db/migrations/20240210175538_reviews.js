@@ -5,6 +5,9 @@ exports.up = function(knex) {
       table.integer('score').notNullable(); // Review score
       table.integer('movie_id').unsigned().notNullable(); // ID of the movie being reviewed
       table.foreign('movie_id').references('movie_id').inTable('movies'); // Foreign key to movies table
+      table.integer('critic_id').unsigned().notNullable();
+      table.foreign('critic_id').references('critic_id').inTable('critics');
+
     });
   };
   
