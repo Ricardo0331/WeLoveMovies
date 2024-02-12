@@ -53,8 +53,31 @@ async function movieExists(req, res, next) {
     });
   }
 
+  async function listTheatersForMovie(req, res, next) {
+    const movieId = res.locals.movie.movie_id;
+
+    const theaters = await MoviesService.listTheatersForMovie(movieId);
+
+    res.json({ data: theaters });
+}
+
+
+
+async function listReviewsForMovie(req, res, next) {
+    const movieId = res.locals.movie.movie_id;
+
+    const reviews = await MoviesService.listReviewsForMovie(movieId);
+
+    res.json({ data: reviews });
+}
+
+
+
 module.exports = {
-  listMovies: asyncErrorBoundary(listMovies),
-  getMovie: [asyncErrorBoundary(movieExists), getMovie],
-  movieExists: asyncErrorBoundary(movieExists),
+    listMovies: asyncErrorBoundary(listMovies),
+    getMovie: [asyncErrorBoundary(movieExists), asyncErrorBoundary(getMovie)],
+    movieExists: asyncErrorBoundary(movieExists),
+    listTheatersForMovie: [asyncErrorBoundary(movieExists), asyncErrorBoundary(listTheatersForMovie)],
+    listReviewsForMovie: [asyncErrorBoundary(movieExists), asyncErrorBoundary(listReviewsForMovie)], 
 };
+
