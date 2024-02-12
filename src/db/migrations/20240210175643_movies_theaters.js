@@ -6,6 +6,7 @@ exports.up = function(knex) {
       table.foreign('theater_id').references('theater_id').inTable('theaters'); // Foreign key to theaters table
       table.boolean('is_showing').notNullable().defaultTo(false); // Whether the movie is currently showing in the theater
       table.primary(['movie_id', 'theater_id']); // Composite primary key
+      table.timestamps(true, true)
     });
   };
   

@@ -6,6 +6,8 @@ exports.up = function(knex) {
       table.string('rating').notNullable(); // Movie rating 
       table.text('description').notNullable(); // Movie description
       table.string('image_url'); // URL to the movie's poster image
+      table.timestamps(true, true)
+
     });
   };
   

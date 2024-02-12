@@ -7,6 +7,8 @@ exports.up = function(knex) {
       table.foreign('movie_id').references('movie_id').inTable('movies'); // Foreign key to movies table
       table.integer('critic_id').unsigned().notNullable();
       table.foreign('critic_id').references('critic_id').inTable('critics');
+      table.timestamps(true, true)
+
 
     });
   };

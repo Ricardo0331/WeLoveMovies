@@ -4,6 +4,8 @@ exports.up = function(knex) {
       table.string('preferred_name').notNullable(); // Critic's preferred name
       table.string('surname').notNullable(); // Critic's surname
       table.string('organization_name').notNullable(); // Name of the organization the critic belongs to
+      table.timestamps(true, true)
+
     });
   };
   
