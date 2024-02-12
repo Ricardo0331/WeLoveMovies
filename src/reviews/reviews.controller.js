@@ -16,7 +16,27 @@ async function deleteReview(req, res) {
   res.sendStatus(204); // No Content
 }
 
-module.exports = {
-  updateReview: asyncErrorBoundary(updateReview),
-  deleteReview: asyncErrorBoundary(deleteReview),
-};
+
+async function reviewExists(req, res, next) {
+    const { reviewId } = req.params;
+    const review = await ReviewsService.read(reviewId);
+  
+    if (review) {
+      res.locals.review = review; // Store the found review in the response locals for use in the next handler
+      return next(); // Proceed to the next middleware/route handler
+    }
+  
+    // If the review is not found, return a 404 error
+    next({
+      status: 404,
+      message: `Review cannot be found with id: ${reviewId}.`,
+    });
+  }
+  
+
+  module.exports = {
+    updateReview: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(updateReview)],
+    deleteReview: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(deleteReview)],
+    reviewExists: asyncErrorBoundary(reviewExists),
+  };
+  
