@@ -25,7 +25,7 @@ function read(movieId) {
   return knex("movies").select("*").where({ movie_id: movieId }).first();
 }
 
-function listTheatersForMovie(movieId) {
+function listTheatersForMovie(movie_id) {
     return knex("theaters as t")
     .join("movies_theaters as mt", "mt.theater_id", "t.theater_id")
     .select("t.*", "mt.movie_id", "mt.is_showing")
@@ -33,7 +33,7 @@ function listTheatersForMovie(movieId) {
 }
 
 
-function listReviewsForMovie(movieId) {
+function listReviewsForMovie(movie_id) {
     return knex("reviews as r")
     .join("critics as c", "c.critic_id", "r.critic_id")
     .select("r.*", "c.*")
