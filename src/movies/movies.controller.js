@@ -30,11 +30,6 @@ async function movieExists(req, res, next) {
   });
 }
 
-async function getMovie(req, res) {
-  // If movieExists middleware has already found the movie, it's available in res.locals.movie
-  res.json({ data: res.locals.movie });
-}
-
 
 
 async function movieExists(req, res, next) {
