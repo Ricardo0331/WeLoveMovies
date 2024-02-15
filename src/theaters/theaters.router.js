@@ -1,8 +1,8 @@
-const express = require("express");
+const router = require("express").Router({ mergeParams: true });
 const controller = require("./theaters.controller");
 
-const router = express.Router();
-
-router.route("/").get(controller.listTheaters);
+router
+    .route("/")
+    .get(controller.list)
 
 module.exports = router;
